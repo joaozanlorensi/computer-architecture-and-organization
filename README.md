@@ -2,6 +2,6 @@
 Repositório para os laboratórios da disciplina de Arquitetura e Organização de Computadores (UTFPR)
 
 ## Alunos
- - João
- - Francisco
- - Luan
+ - João Zanlorensi
+ - Francisco Miamoto
+ - Luan Roberto
