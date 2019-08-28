@@ -1,7 +1,7 @@
 -- Lab 1 - ULA (S11)
 -- Students: Francisco Miamoto
 --           João Pedro Zanlorensi Cardoso
---           Luan Roberto
+--           Luan Roberto Estrada Martins
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
