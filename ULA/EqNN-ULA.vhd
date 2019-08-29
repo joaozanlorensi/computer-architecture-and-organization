@@ -7,10 +7,10 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 -- ULA Opcodes:
---   00 - ADD : Output recieves in_A + in_B
---   01 - SUB : Output recieves in_A - in_B 
---   10 - DIV : Output recieves in_A / in_B
---   11 - NEG : Flag recieves 1 if in_A is negative
+--   00 - ADD : Output receives in_A + in_B
+--   01 - SUB : Output receives in_A - in_B 
+--   10 - DIV : Output receives in_A / in_B
+--   11 - NEG : Flag receives 1 if in_A is negative
 
 entity ula is
     port (
