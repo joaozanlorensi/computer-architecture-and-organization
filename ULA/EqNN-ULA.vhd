@@ -22,29 +22,11 @@ entity ula is
 end entity;
 
 architecture a_ula of ula is
-    signal operation_result : unsigned(15 downto 0);
-    signal flag_result      : std_logic;
 begin
-    process (in_A, in_B, op)
-    begin
-        case(op) is
-            when "00" =>
-            operation_result <= in_A + in_B;
-            flag_result      <= '0';
-            when "01" =>
-            operation_result <= in_A - in_B;
-            flag_result      <= '0';
-            when "10" =>
-            operation_result <= in_A / in_B;
-            flag_result      <= '0';
-            when "11" =>
-            operation_result <= x"0000";
-            flag_result      <= in_A(15);
-            when others =>
-            operation_result <= x"0000";
-            flag_result      <= '0';
-        end case;
-    end process;
-    out_s <= operation_result;
-    flag  <= flag_result;
+    out_s <= in_A + in_B when op = "00" else
+        in_A - in_B when op = "01" else
+        in_A / in_B when op = "10" else
+        x"0000";
+    flag <= in_A(15) when op = "11" else
+        '0';
 end architecture;
