@@ -13,20 +13,20 @@ architecture a_reg16bits_tb of reg16bits_tb is
             wr_en    : in std_logic;
             data_in  : in unsigned(15 downto 0);
             data_out : out unsigned(15 downto 0)
-        )
+        );
     end component;
 
-    signal clk, rst, wr_en : std_logic;
+    signal clk, rst, wr_en   : std_logic;
     signal data_in, data_out : unsigned(15 downto 0);
-    
-    begin
-    uut: reg16bits port map(
-        clk => clk,
-        rst => rst,
-        wr_en => wr_en,
-        data_in => data_in,
-        data_out => data_out,
-    )
+
+begin
+    uut : reg16bits port map(
+        clk      => clk,
+        rst      => rst,
+        wr_en    => wr_en,
+        data_in  => data_in,
+        data_out => data_out
+    );
     process
     begin
         clk <= '0';
@@ -45,13 +45,13 @@ architecture a_reg16bits_tb of reg16bits_tb is
 
     process
     begin
+        wr_en   <= '0';
+        data_in <= x"FFFF";
         wait for 100 ns;
-        wr_en <= '0';
-        data_in <= "1111111111111111"
+        wr_en   <= '1';
+        data_in <= x"FF00";
         wait for 100 ns;
-        wr_en <= '1';
-        data_in <= "1111111100000000"
         wait;
     end process;
-    
+
 end architecture;
