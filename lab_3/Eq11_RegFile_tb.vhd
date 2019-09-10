@@ -48,10 +48,39 @@ begin
         wait for 50 ns;
     end process;
 
-    -- Test writing data
-    -- ...
+    process
+    begin
+        rst <= '1';
+        wait for 50 ns;
+        rst <= '0';
+        wait;
+    end process;
 
-    -- Test reading data
-    -- ...
-
+    process(clk)
+    begin
+        wait 100 ns;
+        wd3 <= x"FFFF"
+        a3 <= '001';
+        we3 <= '1';
+        wait 100 ns;
+        wd3 <= x"FFF0"
+        a3 <= '010';
+        we3 <= '1';
+        wait 100 ns;
+        wd3 <= x"FF00";
+        a3 <= '011';
+        we3 <= '1';
+        wait 100 ns;
+        we3 <= '0';
+        wait 100 ns;
+        a1 <= x"001";
+        a2 <= x"100";
+        wait 100 ns;
+        a1 <= x"010";
+        a2 <= x"010";
+        wait 100 ns;
+        a1 <= x"011";
+        a2 <= x"000";
+        wait;
+    end process;
 end architecture;
