@@ -1,3 +1,7 @@
+-- Lab 2 - Register File (S11)
+-- Students: Francisco Miamoto
+--           João Pedro Zanlorensi Cardoso
+--           Luan Roberto Estrada Martins
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -9,17 +13,17 @@ entity reg16bits is
         wr_en    : in std_logic;
         data_in  : in unsigned(15 downto 0);
         data_out : out unsigned(15 downto 0)
-    )
+    );
 end entity;
 
 architecture a_reg16bits of reg16bits is
-    signal registro : unsigned(7 downto 0);
+    signal registro : unsigned(15 downto 0);
 begin
 
     process (clk, rst, wr_en)
     begin
         if rst = '1' then
-            registro <= "0000000000000000";
+            registro <= x"0000";
         elsif wr_en = '1' then
             if rising_edge(clk) then
                 registro <= data_in;
