@@ -51,36 +51,41 @@ begin
     process
     begin
         rst <= '1';
-        wait for 50 ns;
+        wait for 100 ns;
         rst <= '0';
         wait;
     end process;
 
-    process(clk)
+    process
     begin
-        wait 100 ns;
-        wd3 <= x"FFFF"
-        a3 <= '001';
-        we3 <= '1';
-        wait 100 ns;
-        wd3 <= x"FFF0"
-        a3 <= '010';
-        we3 <= '1';
-        wait 100 ns;
-        wd3 <= x"FF00";
-        a3 <= '011';
-        we3 <= '1';
-        wait 100 ns;
         we3 <= '0';
-        wait 100 ns;
-        a1 <= x"001";
-        a2 <= x"100";
-        wait 100 ns;
-        a1 <= x"010";
-        a2 <= x"010";
-        wait 100 ns;
-        a1 <= x"011";
-        a2 <= x"000";
+        a1  <= "000";
+        a2  <= "000";
+        a3  <= "000";
+        wd3 <= x"0000";
+        wait for 100 ns;
+        wd3 <= x"FFFF";
+        a3  <= "001";
+        we3 <= '1';
+        wait for 50 ns;
+        wd3 <= x"FFF0";
+        a3  <= "010";
+        we3 <= '1';
+        wait for 150 ns;
+        wd3 <= x"FF00";
+        a3  <= "011";
+        we3 <= '1';
+        wait for 150 ns;
+        we3 <= '0';
+        wait for 150 ns;
+        a1 <= "001";
+        a2 <= "100";
+        wait for 150 ns;
+        a1 <= "010";
+        a2 <= "000";
+        wait for 150 ns;
+        a1 <= "011";
+        a2 <= "000";
         wait;
     end process;
 end architecture;
