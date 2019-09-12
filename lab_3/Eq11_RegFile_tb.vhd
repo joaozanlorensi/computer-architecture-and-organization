@@ -51,41 +51,39 @@ begin
     process
     begin
         rst <= '1';
+        we3 <= '0';
         wait for 100 ns;
         rst <= '0';
+        wait for 50 ns;
+        we3 <= '1';
+        wait for 400 ns;
+        we3 <= '0';
         wait;
     end process;
 
     process
     begin
-        we3 <= '0';
         a1  <= "000";
         a2  <= "000";
         a3  <= "000";
         wd3 <= x"0000";
-        wait for 100 ns;
-        wd3 <= x"FFFF";
+        wait for 150 ns;
+        -- Write some data
+        wd3 <= x"F013";
         a3  <= "001";
-        we3 <= '1';
-        wait for 50 ns;
-        wd3 <= x"FFF0";
-        a3  <= "010";
-        we3 <= '1';
         wait for 150 ns;
-        wd3 <= x"FF00";
-        a3  <= "011";
-        we3 <= '1';
+        wd3 <= x"0050";
+        a3  <= "110";
         wait for 150 ns;
-        we3 <= '0';
-        wait for 150 ns;
+        -- Read registers
         a1 <= "001";
-        a2 <= "100";
-        wait for 150 ns;
-        a1 <= "010";
         a2 <= "000";
+        wait for 150 ns;
+        a1 <= "110";
+        a2 <= "001";
         wait for 150 ns;
         a1 <= "011";
-        a2 <= "000";
+        a2 <= "111";
         wait;
     end process;
 end architecture;

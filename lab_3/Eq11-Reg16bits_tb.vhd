@@ -31,6 +31,7 @@ begin
         data_in  => data_in,
         data_out => data_out
     );
+
     process
     begin
         clk <= '0';
