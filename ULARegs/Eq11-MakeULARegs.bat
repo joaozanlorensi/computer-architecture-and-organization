@@ -13,7 +13,7 @@ C:\ghdl\ghdl\bin\ghdl.exe -a Eq11-RegFile.vhd
 C:\ghdl\ghdl\bin\ghdl.exe -e register_file
 
 C:\ghdl\ghdl\bin\ghdl.exe -a Eq11-ULARegs.vhd
-C:\ghdl\ghdl\bin\ghdl.exe -e ula_regs
+C:\ghdl\ghdl\bin\ghdl.exe -e ularegs
 
 C:\ghdl\ghdl\bin\ghdl.exe -r ULARegs_tb --wave=Eq11-ULARegs_tb.ghw
 

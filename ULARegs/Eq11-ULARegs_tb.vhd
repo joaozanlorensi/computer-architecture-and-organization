@@ -8,7 +8,7 @@ use ieee.numeric_std.all;
 
 entity ularegs_tb is
     port (
-
+       
     );
 end entity;
 
