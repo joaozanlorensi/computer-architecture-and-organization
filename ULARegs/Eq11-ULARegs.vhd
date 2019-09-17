@@ -12,6 +12,8 @@ entity ularegs is
         wa3      : in unsigned(2 downto 0);  -- address to write in
         wen      : in std_logic;              -- write enable
         data_in  : in unsigned(15 downto 0);  -- data to write
+        sel      : in std_logic;              -- selector to choose whether the data from the 2nd operator will come from a register or imm 
+        imm      : in unsigned(15 downto 0);  -- immediate: constant value
         rst      : in std_logic;              -- reset
         clk      : in std_logic;              -- clock
         op       : in unsigned(1 downto 0);   -- operation selector
@@ -50,13 +52,11 @@ architecture a_ularegs of ularegs is
     signal in_B : unsigned(15 downto 0);
     signal out_s : unsigned(15 downto 0);
     signal data1, data2 : unsigned(15 downto 0);
-    signal sel          : std_logic;
-    signal imm          : unsigned(15 downto 0);
 
 begin
-
+    -- Mux used to select the 2nd data operator:
     data2 <= rd2 when sel = '0' else
-            imm when sel = '1' else
+             imm when sel = '1' else
             x"0000";
 
     regs : register_file port map(
