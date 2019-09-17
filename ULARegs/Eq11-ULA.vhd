@@ -14,10 +14,10 @@ use IEEE.numeric_std.all;
 
 entity ula is
     port (
-        in_A, in_B : in unsigned(15 downto 0);
-        op         : in unsigned(1 downto 0);
-        out_s      : out unsigned(15 downto 0);
-        flag       : out std_logic
+        in_A, in_B : in unsigned(15 downto 0); -- Data inputs 
+        op         : in unsigned(1 downto 0); -- Defines the operation
+        out_s      : out unsigned(15 downto 0); -- Result of the operation
+        flag       : out std_logic -- Flag
     );
 end entity;
 
