@@ -21,7 +21,7 @@ architecture a_ularegs_tb of ularegs_tb is
         op       : in unsigned(1 downto 0);   -- operation selector
         data_out : out unsigned(15 downto 0); -- result of the operation
         flag     : out std_logic              -- flag
-    )
+    );
     end component;
 
     signal ra1, ra2 : unsigned(15 downto 0);
