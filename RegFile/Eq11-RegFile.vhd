@@ -1,6 +1,6 @@
 -- Lab 2 - Register File (S11)
 -- Students: Francisco Miamoto
---           João Pedro Zanlorensi Cardoso
+--           Joao Pedro Zanlorensi Cardoso
 --           Luan Roberto Estrada Martins
 library ieee;
 use ieee.std_logic_1164.all;

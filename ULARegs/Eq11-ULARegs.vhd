@@ -63,7 +63,7 @@ begin
         a1  => ra1,
         a2  => ra2,
         a3  => wa3,
-        wd3 => out_s,
+        wd3 => data_in,
         we3 => wen,
         clk => clk,
         rst => rst,

@@ -41,22 +41,22 @@ architecture a_ularegs_tb of ularegs_tb is
 
 begin
     uut : ularegs port map(
-        ra1 => ra1, 
-        ra2 => ra2,       
-        wa3 => wa3,
-        wen => wen,      
-        data_in => data_in, 
-        sel => sel,       
-        imm => imm,     
-        rst => rst,      
-        clk => clk,      
-        op => op,       
-        data_out => data_out, 
-        flag => flag 
+        ra1      => ra1,
+        ra2      => ra2,
+        wa3      => wa3,
+        wen      => wen,
+        data_in  => data_in,
+        sel      => sel,
+        imm      => imm,
+        rst      => rst,
+        clk      => clk,
+        op       => op,
+        data_out => data_out,
+        flag     => flag
     );
-    
+
     imm <= x"0000";
-    
+
     process
     begin
         clk <= '0';
@@ -71,21 +71,32 @@ begin
         wen <= '0';
         wait for 100 ns;
         rst <= '0';
-        wait for 50 ns;
+        wait for 25 ns;
         wen <= '1';
-        wait for 400 ns;
+        wait for 200 ns;
         wen <= '0';
         wait;
     end process;
 
     process
     begin
-        wa3 <= "001";
-        data_in <= x"FF00";
-        wait for 25 ns;
-        wa3 <= "010";
+        wait for 125 ns;
+        wa3     <= "001";
+        data_in <= x"0F00";
+        wait for 100 ns;
+        wa3     <= "010";
         data_in <= x"0050";
-        wait for 25 ns;
+        wait for 175 ns;
+        ra1 <= "001";
+        ra2 <= "010";
         wait;
+    end process;
+
+    process
+    begin
+        sel <= '0';
+        wait for 400 ns;
+        op <= "01";
+            wait;
     end process;
 end architecture;
