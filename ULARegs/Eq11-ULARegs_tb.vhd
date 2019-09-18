@@ -60,10 +60,10 @@ begin
         flag     => flag
     );
 
-    imm <= x"0000";
+    imm <= x"F000";
 
     process
-    begin -- clock activation
+    begin
         clk <= '0';
         wait for 50 ns;
         clk <= '1';
@@ -71,17 +71,16 @@ begin
     end process;
 
     process
-    begin -- reset and write enable activation
+    begin
         rst <= '1';
         wait for 100 ns;
         rst <= '0';
-        wait for 100 ns;
         wait;
     end process;
 
     process
     begin
-        -- Clear everything
+        -- Clears everything
         ra1     <= "000";
         ra2     <= "000";
         wen     <= '0';
@@ -92,54 +91,34 @@ begin
 
         wait for 100 ns;
 
-        -- Write data to reg 1
+        -- Writes data to reg 1
         wa3     <= "001";
-        data_in <= x"0F00";
+        data_in <= x"FF00";
         wen     <= '1';
         wait for 100 ns;
         wen <= '0';
 
-        -- Write data to reg 2 
+        -- Writes data to reg 2 
         wa3     <= "010";
-        data_in <= x"0050";
+        data_in <= x"F000";
         wen     <= '1';
         wait for 175 ns;
         wen <= '0';
 
-        -- Read data from registers
+        -- Reads data from registers
         ra1 <= "001";
         ra2 <= "010";
-
-        wait for 100 ns;
-
-        -- Subtract them
+        
+        -- Subtracts them
         sel <= '0';  -- Uses the second register instead of the imm
         op  <= "01"; -- SUB R1, R2
 
         wait for 100 ns;
 
-        op <= "11"; -- Sees if result is negative, visible in 'flag'
+        sel <= '1'; -- Uses the imm instead of the second register
+        op <= "11"; -- Checks if both inputs are negative
 
-        ra1 <= "010";
-        ra2 <= "001";
-
-        op <= "01"; -- SUB R2, R1
         wait for 100 ns;
-
-        data_in <= data_out; -- Write data receives output of ALU
-        wa3     <= "100";
-        wen     <= '1';
-        wait for 200 ns;
-
-        ra1 <= "100"; -- Read the written data
-        op  <= "11";  -- Check if register 1 is negative, visible in flag
-
-        wait for 200 ns;
-
-        ra1 <= "001";
-        op  <= "11";
-
         wait;
     end process;
-
 end architecture;

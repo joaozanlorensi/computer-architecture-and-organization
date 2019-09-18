@@ -83,6 +83,4 @@ begin
         imm when sel = '1' else
         x"0000";
 
-    data2 <= imm when sel = '1';
-
 end architecture;
