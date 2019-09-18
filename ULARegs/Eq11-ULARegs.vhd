@@ -55,6 +55,8 @@ architecture a_ularegs of ularegs is
 
 begin
     -- Mux used to select the 2nd data operator:
+    --           0 - selects the data from the 2nd register read
+    --           1 - selects the data from the immediate
     data2 <= rd2 when sel = '0' else
              imm when sel = '1' else
             x"0000";
@@ -63,7 +65,7 @@ begin
         a1  => ra1,
         a2  => ra2,
         a3  => wa3,
-        wd3 => out_s,
+        wd3 => wd3,
         we3 => wen,
         clk => clk,
         rst => rst,
