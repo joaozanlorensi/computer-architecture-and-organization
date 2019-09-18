@@ -69,11 +69,11 @@ begin
     begin -- reset and write enable activation
         rst <= '1';
         wen <= '0';
-        wait for 50 ns;
+        wait for 100 ns;
         rst <= '0';
-        wait for 25 ns;
+        wait for 100 ns;
         wen <= '1';
-        wait for 200 ns;
+        wait for 400 ns;
         wen <= '0';
         wait for 1000 ns;
         wait;
@@ -81,23 +81,29 @@ begin
 
     process
     begin
-        wait for 125 ns;
+        sel <= '0';
+        op <= "00";
+        wait for 200 ns;
         wa3     <= "001";
-        data_in <= x"0F00";
-        wait for 100 ns;
+        data_in <= x"00FF";
+        sel <= '0';
+        op <= "00";
+        wait for 200 ns;
         wa3     <= "010";
-        data_in <= x"0050";
-        wait for 175 ns;
+        data_in <= x"000F";
+        sel <= '0';
+        op <= "01";
+        wait for 200 ns;
         ra1 <= "001";
         ra2 <= "010";
+        sel <= '0';
+        op <= "01";
+        wait for 200 ns;
+        ra1 <= "001";
+        ra2 <= "000";
+        sel <= '1';
+        op <= "01";
         wait;
     end process;
 
-    process
-    begin
-        sel <= '0';
-        wait for 400 ns;
-        op <= "01";
-            wait;
-    end process;
 end architecture;

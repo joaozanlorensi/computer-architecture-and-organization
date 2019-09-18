@@ -57,10 +57,7 @@ begin
     -- Mux used to select the 2nd data operator:
     --           0 - selects the data from the 2nd register read
     --           1 - selects the data from the immediate
-    data2 <= rd2 when sel = '0' else
-             imm when sel = '1' else
-            x"0000";
-
+    
     regs : register_file port map(
         a1  => ra1,
         a2  => ra2,
@@ -73,11 +70,13 @@ begin
         rd2 => data2
         );
     alu : ula port map(
-            in_A  => rd1,
-            in_B  => rd2,
+            in_A  => data1,
+            in_B  => data2,
             op    => op,
             out_s => out_s,
             flag  => flag
         );
+
+    data2 <= imm when sel = '1';
 
 end architecture;
