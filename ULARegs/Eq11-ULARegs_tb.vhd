@@ -115,6 +115,10 @@ begin
 
         wait for 100 ns;
 
+        -- Reads data from registers
+        ra1 <= "001";
+        ra2 <= "000";
+
         sel <= '1'; -- Uses the imm instead of the second register
         op <= "11"; -- Checks if both inputs are negative
 
