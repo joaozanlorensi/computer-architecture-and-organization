@@ -1,4 +1,4 @@
--- Lab 2 - Register File (S11)
+-- Lab 3 - ALU + RegFile (S11)
 -- Students: Francisco Miamoto
 --           João Pedro Zanlorensi Cardoso
 --           Luan Roberto Estrada Martins
@@ -18,10 +18,12 @@ architecture a_ularegs_tb of ularegs_tb is
             wen      : in std_logic;              -- write enable
             data_in  : in unsigned(15 downto 0);  -- data to write
             sel      : in std_logic;              -- selector to choose whether the data from the 2nd operator will come from a register or imm 
-            imm      : in unsigned(15 downto 0);  -- immediate: constant value
+            imm      : in unsigned(15 downto 0);  -- immediate: constant value, set sel = 1 to use it
             rst      : in std_logic;              -- reset
             clk      : in std_logic;              -- clock
             op       : in unsigned(1 downto 0);   -- operation selector
+            rd1      : out unsigned(15 downto 0); -- Data from register 1
+            rd2      : out unsigned(15 downto 0); -- Data from register 2
             data_out : out unsigned(15 downto 0); -- result of the operation
             flag     : out std_logic              -- flag
         );
@@ -38,6 +40,7 @@ architecture a_ularegs_tb of ularegs_tb is
     signal op       : unsigned(1 downto 0);
     signal data_out : unsigned(15 downto 0);
     signal flag     : std_logic;
+    signal rd1, rd2 : unsigned(15 downto 0);
 
 begin
     uut : ularegs port map(
@@ -52,6 +55,8 @@ begin
         clk      => clk,
         op       => op,
         data_out => data_out,
+        rd1      => rd1,
+        rd2      => rd2,
         flag     => flag
     );
 
@@ -68,41 +73,72 @@ begin
     process
     begin -- reset and write enable activation
         rst <= '1';
-        wen <= '0';
         wait for 100 ns;
         rst <= '0';
         wait for 100 ns;
-        wen <= '1';
-        wait for 400 ns;
-        wen <= '0';
-        wait for 1000 ns;
         wait;
     end process;
 
     process
     begin
-        sel <= '0';
-        op <= "00";
-        wait for 200 ns;
+        -- Clear everything
+        ra1     <= "000";
+        ra2     <= "000";
+        wen     <= '0';
+        wa3     <= "000";
+        op      <= "00";
+        sel     <= '0';
+        data_in <= x"0000";
+
+        wait for 100 ns;
+
+        -- Write data to reg 1
         wa3     <= "001";
-        data_in <= x"00FF";
-        sel <= '0';
-        op <= "00";
-        wait for 200 ns;
+        data_in <= x"0F00";
+        wen     <= '1';
+        wait for 100 ns;
+        wen <= '0';
+
+        -- Write data to reg 2 
         wa3     <= "010";
-        data_in <= x"000F";
-        sel <= '0';
-        op <= "01";
-        wait for 200 ns;
+        data_in <= x"0050";
+        wen     <= '1';
+        wait for 175 ns;
+        wen <= '0';
+
+        -- Read data from registers
         ra1 <= "001";
         ra2 <= "010";
-        sel <= '0';
-        op <= "01";
+
+        wait for 100 ns;
+
+        -- Subtract them
+        sel <= '0';  -- Uses the second register instead of the imm
+        op  <= "01"; -- SUB R1, R2
+
+        wait for 100 ns;
+
+        op <= "11"; -- Sees if result is negative, visible in 'flag'
+
+        ra1 <= "010";
+        ra2 <= "001";
+
+        op <= "01"; -- SUB R2, R1
+        wait for 100 ns;
+
+        data_in <= data_out; -- Write data receives output of ALU
+        wa3     <= "100";
+        wen     <= '1';
         wait for 200 ns;
+
+        ra1 <= "100"; -- Read the written data
+        op  <= "11";  -- Check if register 1 is negative, visible in flag
+
+        wait for 200 ns;
+
         ra1 <= "001";
-        ra2 <= "000";
-        sel <= '1';
-        op <= "01";
+        op  <= "11";
+
         wait;
     end process;
 

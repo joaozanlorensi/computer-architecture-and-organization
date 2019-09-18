@@ -10,7 +10,7 @@ use IEEE.numeric_std.all;
 --   00 - ADD : Output receives in_A + in_B
 --   01 - SUB : Output receives in_A - in_B 
 --   10 - DIV : Output receives in_A / in_B
---   11 - NEG : Flag receives 1 if in_A is negative
+--   11 - NEG : Flag receives 1 if both inputs are negative
 
 entity ula is
     port (
@@ -27,6 +27,6 @@ begin
         in_A - in_B when op = "01" else
         in_A / in_B when op = "10" else
         x"0000";
-    flag <= in_A(15) when op = "11" else
+    flag <= in_A(15) and in_B(15) when op = "11" else
         '0';
 end architecture;
