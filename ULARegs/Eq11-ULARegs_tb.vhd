@@ -120,7 +120,7 @@ begin
         ra2 <= "000";
 
         sel <= '1'; -- Uses the imm instead of the second register
-        op <= "11"; -- Checks if both inputs are negative
+        op <= "11"; -- Checks if reg1 is greater than reg2
 
         wait for 100 ns;
         wait;
