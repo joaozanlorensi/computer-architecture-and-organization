@@ -32,6 +32,6 @@ contador <= x"0000";
             end if;
         end if;
         contador <= contador + x"0001";
+        data_out <= contador;
     end process;    
-    data_out <= contador;
 end architecture;
