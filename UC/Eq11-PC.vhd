@@ -1,3 +1,8 @@
+-- Lab 4 - Program Counter
+-- Students: Francisco Miamoto
+--           João Pedro Zanlorensi
+--           Luan Roberto
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
