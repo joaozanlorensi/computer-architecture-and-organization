@@ -5,4 +5,3 @@ Repositório para os laboratórios da disciplina de Arquitetura e Organização 
  - João Zanlorensi
  - Francisco Miamoto
  - Luan Roberto
-git
