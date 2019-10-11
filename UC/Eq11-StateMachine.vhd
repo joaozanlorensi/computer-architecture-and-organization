@@ -1,4 +1,4 @@
--- Lab 4 - Control Unit
+-- Lab 4 - State Machine
 -- Students: Francisco Miamoto
 --           João Pedro Zanlorensi
 --           Luan Roberto

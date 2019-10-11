@@ -29,6 +29,6 @@ begin
                 registro <= data_in;
             end if;
         end if;
-        data_out <= registro;
-    end process;    
+    end process;
+    data_out <= registro;    
 end architecture;

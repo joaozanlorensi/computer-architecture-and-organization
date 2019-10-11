@@ -1,4 +1,4 @@
--- Lab 4 - Control Unit
+-- Lab 4 - ROM
 -- Students: Francisco Miamoto
 --           João Pedro Zanlorensi
 --           Luan Roberto
@@ -14,7 +14,7 @@ architecture a_rom_tb of rom_tb is
         port (
             clk     : in std_logic;
             address : in unsigned(6 downto 0);
-            data    : out unsigned(7 downto 0)
+            data    : out unsigned(11 downto 0)
         );
     end component;
 

@@ -43,22 +43,23 @@ begin
 
     process
     begin
-        clk <= '0';
-        wait for 50 ns;
         clk <= '1';
+        wait for 50 ns;
+        clk <= '0';
         wait for 50 ns;
     end process;
 
     process
     begin
         rst <= '1';
-        wait for 100 ns;
+        wait for 100 ns;s
         rst <= '0';
         wait;
     end process;
 
     process
     begin
+        wait for 100 ns;
         data_in <= data_out + "0000001";
         wait for 50 ns;
     end process;
