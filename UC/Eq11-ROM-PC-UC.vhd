@@ -49,53 +49,5 @@ begin
         address => data_out,
         data => rom_out
     );
-
-    process
-    begin
-        wr_en <= '1';
-        wait;
-    end process;
-
-    process
-    begin
-        clk <= '1';
-        wait for 50 ns;
-        clk <= '0';
-        wait for 50 ns;
-    end process;
-
-    process
-    begin
-        rst <= '1';
-        wait for 100 ns;
-        rst <= '0';
-        wait;
-    end process;
-
-    process
-    begin -- Percebemos que o valor da saida correspondente à entrada atual acontece a um clock afrente
-        data_in <="0000000";
-        wait for 100 ns;
-        data_in <= data_out + "0000001";
-        wait for 100 ns;
-        data_in <= data_out + "0000001";
-        wait for 100 ns;
-        data_in <= data_out + "0000001";
-        wait for 100 ns;
-        data_in <= data_out + "0000001";
-        wait for 100 ns;
-        data_in <= data_out + "0000001";
-        wait for 100 ns;
-        data_in <= data_out + "0000001";
-        wait for 100 ns;
-        data_in <= data_out + "0000001";
-        wait for 100 ns;
-        data_in <= data_out + "0000001";
-        wait for 100 ns;
-        data_in <= data_out + "0000001";
-        wait for 100 ns;
-        data_in <= "0000100";
-        wait for 100 ns;
-    end process;
         
 end architecture;
