@@ -77,7 +77,8 @@ begin
     );
 
     -- Jump address 
-    jump_addr <= rom_out(6 downto 0);
+    jump_addr <= rom_out(6 downto 0) when jump_en = '1' else
+    "0000000";
 
     -- PC input
     pc_in <= pc_out + 1 when jump_en = '0' else
