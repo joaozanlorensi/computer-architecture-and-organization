@@ -20,9 +20,9 @@ architecture a_rom of rom is
     0  => x"002",
     1  => x"080",
     2  => x"000",
-    3  => x"000",
+    3  => x"001",
     4  => x"080",
-    5  => x"002",
+    5  => x"F02",
     6  => x"0F3",
     7  => x"002",
     8  => x"002",
@@ -30,10 +30,10 @@ architecture a_rom of rom is
     10 => x"000",
     others => (others => '0')
     );
+
 begin
     process (clk)
     begin
-        -- ROM Síncrona!
         if (rising_edge(clk)) then
             data <= rom_data(to_integer(address));
         end if;

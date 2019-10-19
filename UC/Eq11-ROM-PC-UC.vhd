@@ -6,13 +6,15 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity rom_uc is
-    port(
-        rom_out : out unsigned(11 downto 0)
+entity rom_pc_uc is
+    port (
+        clk : in std_logic;
+        rst : in std_logic
     );
 end entity;
 
-architecture a_rom_uc of rom_uc is
+architecture a_rom_pc_uc of rom_pc_uc is
+    -- Program counter
     component pc is
         port (
             clk      : in std_logic;
@@ -22,6 +24,8 @@ architecture a_rom_uc of rom_uc is
             data_out : out unsigned(6 downto 0)
         );
     end component;
+
+    -- ROM
     component rom is
         port (
             clk     : in std_logic;
@@ -30,24 +34,52 @@ architecture a_rom_uc of rom_uc is
         );
     end component;
 
-    signal clk     : std_logic;
-    signal rst     : std_logic;
-    signal wr_en     : std_logic;
-    signal data_in : unsigned(6 downto 0);
-    signal data_out    : unsigned(6 downto 0);
-    
+    -- Control unit
+    component uc is
+        port (
+            instruction : in unsigned(11 downto 0);
+            clk         : in std_logic;
+            rst         : in std_logic;
+            jump_en     : out std_logic;
+            wr_en       : out std_logic
+        );
+    end component;
+
+    signal wr_en   : std_logic;
+    signal jump_en : std_logic;
+
+    signal pc_out : unsigned(6 downto 0);
+    signal pc_in  : unsigned(6 downto 0);
+
+    signal rom_out : unsigned(11 downto 0);
+
+    signal jump_addr : unsigned(6 downto 0);
+
 begin
-    uutpc : pc port map(
+    inner_pc : pc port map(
+        clk      => clk,
+        rst      => rst,
+        wr_en    => wr_en,
+        data_in  => pc_in,
+        data_out => pc_out
+    );
+    inner_rom : rom port map(
         clk     => clk,
-        rst     => rst,
-        wr_en   => wr_en,
-        data_in => data_in,
-        data_out => data_out
+        address => pc_out,
+        data    => rom_out
     );
-    uutrom : rom port map(
-        clk => clk,
-        address => data_out,
-        data => rom_out
+    inner_uc : uc port map(
+        clk         => clk,
+        rst         => rst,
+        wr_en       => wr_en,
+        jump_en     => jump_en,
+        instruction => rom_out
     );
-        
+
+    -- Jump address 
+    jump_addr <= rom_out(6 downto 0);
+
+    -- PC input
+    pc_in <= pc_out + 1 when jump_en = '0' else
+    jump_addr;
 end architecture;
