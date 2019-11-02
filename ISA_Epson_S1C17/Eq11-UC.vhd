@@ -17,16 +17,18 @@ entity uc is
 end entity;
 
 architecture a_uc of uc is
-    signal state  : std_logic;
+    signal state  : unsigned(1 downto 0);
     signal opcode : unsigned(3 downto 0);
 begin
     process (clk, rst)
     begin
         if rst = '1' then
-            state <= '0';
+            state <= "00";
+        elsif rising_edge(clk) then
+            if state = "10" then
+                state <= "00";
             else
-            if rising_edge(clk) then
-                state <= not state;
+                state <= state + 1;
             end if;
         end if;
     end process;
@@ -34,9 +36,9 @@ begin
     opcode <= instruction(11 downto 8);
 
     jump_en <= '1' when state = '1' and opcode = "1111" else
-    '0';
+        '0';
 
     wr_en <= '1' when state = '1' else
-    '0';
+        '0';
 
 end architecture;
