@@ -14,9 +14,9 @@ use IEEE.numeric_std.all;
 
 entity ula is
     port (
-        in_A, in_B : in unsigned(15 downto 0);
+        in_A, in_B : in unsigned(23 downto 0);
         op         : in unsigned(1 downto 0);
-        out_s      : out unsigned(15 downto 0);
+        out_s      : out unsigned(23 downto 0);
         flag       : out std_logic
     );
 end entity;
@@ -26,7 +26,7 @@ begin
     out_s <= in_A + in_B when op = "00" else
         in_A - in_B when op = "01" else
         in_A / in_B when op = "10" else
-        x"0000";
-    flag <= in_A(15) when op = "11" else
+        x"000000";
+    flag <= in_A(23) when op = "11" else
         '0';
 end architecture;
