@@ -6,11 +6,11 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity rom_pc_uc_tb is
+entity uprocessor_tb is
 end entity;
 
-architecture a_rom_pc_uc_tb of rom_pc_uc_tb is
-    component rom_pc_uc is
+architecture a_uprocessor_tb of uprocessor_tb is
+    component uprocessor is
         port (
             clk : in std_logic;
             rst : in std_logic
@@ -20,7 +20,7 @@ architecture a_rom_pc_uc_tb of rom_pc_uc_tb is
     signal clk : std_logic;
     signal rst : std_logic;
 begin
-    uut : rom_pc_uc port map(
+    uut : uprocessor port map(
         clk => clk,
         rst => rst
     );
