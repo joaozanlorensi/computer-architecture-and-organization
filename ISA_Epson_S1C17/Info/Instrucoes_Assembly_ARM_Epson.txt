@@ -12,7 +12,7 @@ TERCEIRA ADD R5, R4, R3
 
 	 LD R3, #5
 	 LD R4, #8
-TERCEIRA LD R5, #0 	; Not sure if necesary
+TERCEIRA LD R5, #0 	; Not sure if necessary
 	 ADD R5, R4
 	 ADD R5, R3
 	 SUB R5, #1

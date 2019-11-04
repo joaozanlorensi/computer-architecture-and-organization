@@ -47,7 +47,7 @@ architecture a_uprocessor of uprocessor is
             ula_op_control : out unsigned(1 downto 0);
             pc_wr_en       : out std_logic;
             regs_wr_en     : out std_logic;
-            regs_wr_sel    : out std_logic;
+            regs_wr_sel    : out unsigned(1 downto 0);
             reg1_sel       : out unsigned(2 downto 0);
             reg2_sel       : out unsigned(2 downto 0);
             imm            : out unsigned(6 downto 0);
@@ -79,10 +79,12 @@ architecture a_uprocessor of uprocessor is
     signal imm         : unsigned(6 downto 0);
     signal pc_wr_en    : std_logic;
     signal regs_wr_en  : std_logic;
-    signal regs_wr_sel : std_logic;
+    signal regs_wr_sel : unsigned(1 downto 0);
     signal reg1_sel    : unsigned(2 downto 0);
     signal reg2_sel    : unsigned(2 downto 0);
     signal jump_en     : std_logic;
+    signal regs_wr_addr   : unsigned(2 downto 0);
+    signal ula_op_control : unsigned(1 downto 0);
 
     -- PC signals
     signal pc_out : unsigned(6 downto 0);
@@ -131,24 +133,33 @@ begin
         regs_wr_sel => regs_wr_sel,
         reg1_sel    => reg1_sel,
         reg2_sel    => reg2_sel,
+        regs_wr_addr => regs_wr_addr,
+        ula_op_control => ula_op_control,
         imm         => imm
     );
     inner_ularegs : ularegs port map(
-        ra1      => reg1_addr,
-        ra2      => reg2_addr,
-        wa3      => write_addr,
+        ra1      => reg1_sel,
+        ra2      => reg2_sel,
+        wa3      => regs_wr_addr,
         wen      => regs_wr_en,
         data_in  => write_data,
-        sel      => sel,
+        sel      => sel, -- FIXME
         imm      => ula_imm,
         rst      => rst,
         clk      => clk,
-        op       => op,
+        op       => ula_op_control,
         rd1      => reg1_data,
         rd2      => reg2_data,
         data_out => ula_out,
         flag     => flag
     );
+
+    -- Jump address 
+    jump_addr <= imm;
+
+    -- PC input
+    pc_in <= pc_out + 1 when jump_en = '0' else
+    jump_addr;
 
     ula_imm <= x"0000" & "0" & imm when imm(6) = '0' else
         x"FFFF" & "1" & imm;
@@ -161,9 +172,12 @@ begin
     pc_in <= pc_out + 1 when jump_en = '0' else
         jump_addr;
 
-    write_data <= ula_out when regs_wr_sel = '0' else
-        ula_imm when regs_wr_sel = '1'
+    write_data <= ula_out when regs_wr_sel = "00" else
+        ula_imm when regs_wr_sel = "01" else
+        reg2_data when regs_wr_sel = "10"
         else
         x"000000";
 
+    sel <= '0';
+    
 end architecture;
