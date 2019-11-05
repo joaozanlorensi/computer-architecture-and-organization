@@ -8,15 +8,15 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity pc is
-    port(
+    port (
         clk      : in std_logic;
         rst      : in std_logic;
         wr_en    : in std_logic;
         data_in  : in unsigned(6 downto 0);
         data_out : out unsigned(6 downto 0)
-    );    
-    end entity;
-    
+    );
+end entity;
+
 architecture a_pc of pc is
     signal registro : unsigned(6 downto 0);
 begin
@@ -30,5 +30,5 @@ begin
             end if;
         end if;
     end process;
-    data_out <= registro;    
+    data_out <= registro;
 end architecture;
