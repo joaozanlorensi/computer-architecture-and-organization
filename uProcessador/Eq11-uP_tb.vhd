@@ -1,4 +1,4 @@
--- Lab 5 - "Programmable calculator"
+-- Lab 6 - Conditional jumps
 -- Students: Francisco Miamoto
 --           João Pedro Zanlorensi
 --           Luan Roberto
