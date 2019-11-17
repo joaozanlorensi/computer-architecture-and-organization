@@ -16,6 +16,6 @@ C:\ghdl\ghdl\bin\ghdl.exe -e ularegs
 C:\ghdl\ghdl\bin\ghdl.exe -e uprocessor_tb
 
 
-C:\ghdl\ghdl\bin\ghdl.exe -r uprocessor_tb --wave=Eq11-uP_tb.ghw --stop-time=24000ns
+C:\ghdl\ghdl\bin\ghdl.exe -r uprocessor_tb --wave=Eq11-uP_tb.ghw --stop-time=48000ns
 
-start cmd /c C:\ghdl\ghdl\gtkwave -f Eq11-uP_tb.ghw -a Eq11-uP_tb.gtkw
+start cmd /c C:\ghdl\ghdl\gtkwave -f Eq11-DesvCond.ghw -a Eq11-DesvCond.gtkw
