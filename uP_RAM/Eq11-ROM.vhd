@@ -1,4 +1,4 @@
--- Lab 6 - Conditional jumps
+-- Lab 7 - RAM
 -- Students: Francisco Miamoto
 --           João Pedro Zanlorensi
 --           Luan Roberto
@@ -17,14 +17,10 @@ end entity;
 architecture a_rom of rom is
     type mem is array (0 to 127) of unsigned(15 downto 0); 
     constant rom_data : mem := (
-    0 => b"100110_010_0000001",  -- ld %r2, 1
-    1 => b"100110_011_0000000",  -- ld %r3, 0
-    2 => b"100110_100_0000000",  -- ld %r4, 0 
-    3 => b"001100_100_1000_011", -- add.a %r4, %r3 ( r4 <- r4 + r3)
-    4 => b"001100_011_1000_010", -- add.a %r3, %r2 ( r3 <- r3 + 1)
-    5 => b"100100_011_0011110",  -- cmp %r3, 30
-    6 => b"000010_000_1111101",  -- jrlt -3
-    7 => b"001010_101_0011_100", -- ld.a %r5, %r4 (r5 <- r4)
+    0 => b"100110_000_0000100",  -- ld %r0, 4
+    1 => b"100110_001_0000011",  -- ld %r1, 3
+    2 => b"001001_000_0010_001", -- ld [%r1], %r0 (stores the value in r0 to the ram address r1)
+    3 => b"001000_010_0010_001", -- ld %r2, [%r1] (loads the value in the ram address r1 to the register r2) OK
     others => (others => '0')
     );
 

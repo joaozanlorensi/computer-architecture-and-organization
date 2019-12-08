@@ -1,7 +1,7 @@
--- Lab 6 - Conditional jumps
+-- Lab 7 - RAM
 -- Students: Francisco Miamoto
---           João Pedro Zanlorensi Cardoso
---           Luan Roberto Estrada Martins
+--           João Pedro Zanlorensi
+--           Luan Roberto
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;

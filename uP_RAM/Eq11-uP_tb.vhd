@@ -1,4 +1,4 @@
--- Lab 6 - Conditional jumps
+-- Lab 7 - RAM
 -- Students: Francisco Miamoto
 --           João Pedro Zanlorensi
 --           Luan Roberto
