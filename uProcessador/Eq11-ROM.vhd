@@ -15,7 +15,7 @@ entity rom is
 end entity;
 
 architecture a_rom of rom is
-    type mem is array (0 to 183) of unsigned(15 downto 0); -- total of instructions: 184 (including variations)
+    type mem is array (0 to 127) of unsigned(15 downto 0); 
     constant rom_data : mem := (
     0 => b"100110_010_0000001",  -- ld %r2, 1
     1 => b"100110_011_0000000",  -- ld %r3, 0
