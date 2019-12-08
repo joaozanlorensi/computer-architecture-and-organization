@@ -1,2 +1,0 @@
-ld.a r3, endereco
-ld r1, r3
