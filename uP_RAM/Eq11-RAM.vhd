@@ -8,12 +8,12 @@ use ieee.numeric_std.all;
 
 entity ram is
     port (
-        clk : in std_logic;
-        address : in unsigned(6 downto 0);
-        wr_en : in std_logic;
-        data_in : in unsigned(15 dowto 0);
+        clk      : in std_logic;
+        address  : in unsigned(6 downto 0);
+        wr_en    : in std_logic;
+        data_in  : in unsigned(15 downto 0);
         data_out : out unsigned(15 downto 0)
-    )
+    );
 end entity;
 
 architecture a_ram of ram is
