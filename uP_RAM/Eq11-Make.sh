@@ -13,4 +13,4 @@ ghdl -e flags
 ghdl -e uprocessor
 ghdl -e uprocessor_tb
 
-ghdl -r uprocessor_tb --wave=Eq11-RAM.ghw --stop-time=1200000ns
+ghdl -r uprocessor_tb --wave=Eq11-RAM.ghw --stop-time=480000ns
