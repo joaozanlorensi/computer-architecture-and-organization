@@ -1,0 +1,38 @@
+Algoritmo para Calcular números primos:
+
+
+ 
+1 - Coloque na memória RAM, com um loop em assembly, os números de interesse:
+    - No mínimo até o 32;
+    - Coloque o número 1 no endereço 1, o 2 no 2, o 3 no 3... (Facilita).
+2 - Elimine da lista, com um loop, todos os múltiplos de 2.
+3 - Idem para 3 e 5.
+4 - Se possível, siga o algoritmo completo
+5 - Faça um loop para ler a RAM do endereço 2 ao 32.
+6 - Caso o valor lido seja primo (divisível sem resto por 1 e ele mesmo apenas) salve o mesmo no endereço 127d da memória RAM.
+Oportunamete veremos o motivo deste requisito. Durante o debug, coloque um pino extra para visualizar as coisas ou simplesmente jogue o dado lido da RAM na saída da ULA, para que possamos acompanhar o resultado.
+
+----- Mover valores para RAM ------
+
+b"100110_010_0000001", -- ld %r2,1 
+b"100110_011_0100000", -- ld %r3,32
+b"100110_000_0000001", -- ld %r0, 1 
+
+b"001001_000_0010_000", -- ld [%r0], %r0
+b"001100_000_1000_010", -- add.a %r0, %r2 (r0 <- r0 + 1)
+b"001101_000_1000_011", -- cmp.a %r0, %r3
+b"000010_000_1111101", -- jrlt -3
+
+----- Encontrar o resto ------
+
+ld %r1, 2
+ld %r0, 4
+
+ld %r4, %r0
+
+sub.a %r4, %r1
+cmp %r1, %r4
+jrlt -2
+add %r0, 1
+cmp %r0, 32
+jrlt -5

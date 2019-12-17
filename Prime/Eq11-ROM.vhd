@@ -42,7 +42,7 @@ architecture a_rom of rom is
     16 => b"001100_101_1010_001", -- sub.a %r5, %r1 ( r5 <- r5 - r1)
     17 => b"000000_110_0001110",  -- jpa SUB_2
     -- STR_RAM
-    18 => b"001001_101_0010_000", -- ld [%r0], %r5 (stores the value in r0 to the ram address r1)
+    18 => b"001001_101_0010_000", -- ld [%r0], %r5 (stores the value in r5 to the ram address r0)
     19 => b"100100_100_0100000",  -- cmp %r0, 32
     20 => b"000010_000_1110101",  -- jrlt LOOP_2
 
@@ -61,7 +61,7 @@ architecture a_rom of rom is
     30 => b"001100_101_1010_001", -- sub.a %r5, %r1 ( r5 <- r5 - r1)
     31 => b"000000_110_0011100",  -- jpa SUB_3
     -- STR_RAM
-    32 => b"001001_101_0010_000", -- ld [%r0], %r5 (stores the value in r0 to the ram address r1)
+    32 => b"001001_101_0010_000", -- ld [%r0], %r5 (stores the value in r5 to the ram address r0)
     33 => b"100100_100_0100000",  -- cmp %r0, 32
     34 => b"000010_000_1110101",  -- jrlt LOOP_3
 
@@ -80,7 +80,7 @@ architecture a_rom of rom is
     44 => b"001100_101_1010_001", -- sub.a %r5, %r1 ( r5 <- r5 - r1)
     45 => b"000000_110_0101010",  -- jpa SUB_5
     -- STR_RAM
-    46 => b"001001_101_0010_000", -- ld [%r0], %r5 (stores the value in r0 to the ram address r1)
+    46 => b"001001_101_0010_000", -- ld [%r0], %r5 (stores the value in r5 to the ram address r0)
     47 => b"100100_100_0100000",  -- cmp %r0, 32
     48 => b"000010_000_1110101",  -- jrlt LOOP_5
 
